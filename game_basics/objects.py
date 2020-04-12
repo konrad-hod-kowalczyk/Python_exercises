@@ -6,9 +6,9 @@ class Rocket(object):
         self.speed = 1.6
         self.gravity = 0.957
 
-        size = self.game.screen.get_size()
+        self.size = self.game.screen.get_size()
 
-        self.pos = Vector2(size[0]/2,size[1]/2)
+        self.pos = Vector2(self.size[0]/2,self.size[1]/2)
         self.vel = Vector2(0,0)
         self.acc = Vector2(0,0)
 
@@ -29,7 +29,11 @@ class Rocket(object):
         self.vel *= 0.9
         self.acc -= Vector2(0,-self.gravity)
         self.vel +=self.acc
-        self.pos += self.vel
+        if self.pos.y == 360:
+            self.pos.y += 0
+            self.pos.x += self.vel.x
+        else:
+            self.pos += self.vel
         self.acc *= 0
     def draw(self):
         #Triangle
