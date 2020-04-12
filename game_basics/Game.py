@@ -24,8 +24,9 @@ class Game(object):
         self.bgX2=self.bg.get_height()
         while True:
             self.draw()
-            self.bgX += 1.1
-            self.bgX2 += 1.1
+            if self.player.vel.y<0:
+                self.bgX -= self.player.vel.y
+                self.bgX2 -= self.player.vel.y
             if self.bgX > self.bg.get_height() * 1:
                 self.bgX = -self.bg.get_height()
             if self.bgX2 > self.bg.get_height() * 1:
