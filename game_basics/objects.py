@@ -29,8 +29,9 @@ class Rocket(object):
         self.vel *= 0.9
         self.acc -= Vector2(0,-self.gravity)
         self.vel +=self.acc
-        if self.pos.y == 360:
-            self.pos.y += 0
+        if self.pos.y <= 100:
+            if self.acc.y > 0:
+                self.pos += self.vel
             self.pos.x += self.vel.x
         else:
             self.pos += self.vel
