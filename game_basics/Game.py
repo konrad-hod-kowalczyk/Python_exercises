@@ -5,6 +5,7 @@ from objects import Rocket
 from objects import Obst
 from objects import Lobst
 from collision import Col
+import random
 import time
 
 class Game(object):
@@ -16,8 +17,7 @@ class Game(object):
         self.screen = pg.display.set_mode((1280, 720))
         self.tps_clock=pg.time.Clock()
         self.tps_delta=0.0
-        self.count=0
-        self.seconds=250
+        pg.time.set_timer(pg.USEREVENT+1,random.randrange(2500,3500))
         self.player=Rocket(self)
         self.rames=Obst(self,0,0)
         self.physics=Col(self)
@@ -40,16 +40,12 @@ class Game(object):
                 obstacle.y+=1.9
                 if obstacle.y == 770:
                     self.obstacles.pop(self.objects.index(object))
-            if self.count == self.seconds:
-                self.obstacles.append(Lobst(self,50))
-                self.seconds -= 1
-                if(self.seconds==10):
-                    self.seconds=100
-                self.count=0
             for event in pg.event.get():
                 # Quitting
                 if event.type == pg.QUIT:
                     sys.exit(0)
+                if event.type == pg.USEREVENT+1:
+                    self.obstacles.append(Lobst(self, 50))
             # Ticking
             self.tps_delta += self.tps_clock.tick() / 1000.0
             while self.tps_delta > 1 / self.tps_max:
