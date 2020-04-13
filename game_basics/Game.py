@@ -3,6 +3,7 @@ import os
 import sys
 from objects import Rocket
 from objects import Obst
+from objects import Lobst
 from collision import Col
 import time
 
@@ -15,14 +16,18 @@ class Game(object):
         self.screen = pg.display.set_mode((1280, 720))
         self.tps_clock=pg.time.Clock()
         self.tps_delta=0.0
+        self.count=0
+        self.seconds=250
         self.player=Rocket(self)
-        self.obstacles=Obst(self)
+        self.rames=Obst(self,0,0)
         self.physics=Col(self)
+        self.obstacles = [Lobst(self,50)]
         pg.display.set_caption("Locket Rauncher")
         self.bg = pg.image.load(os.path.join('images', 'mg2.jpg')).convert()
         self.bgX=0
         self.bgX2=self.bg.get_height()
         while True:
+            self.count += 1
             self.draw()
             if self.player.vel.y<0:
                 self.bgX -= self.player.vel.y
@@ -31,6 +36,16 @@ class Game(object):
                 self.bgX = -self.bg.get_height()
             if self.bgX2 > self.bg.get_height() * 1:
                 self.bgX2 = -self.bg.get_height()
+            for obstacle in self.obstacles:
+                obstacle.y+=1.9
+                if obstacle.y == 770:
+                    self.obstacles.pop(self.objects.index(object))
+            if self.count == self.seconds:
+                self.obstacles.append(Lobst(self,50))
+                self.seconds -= 1
+                if(self.seconds==10):
+                    self.seconds=100
+                self.count=0
             for event in pg.event.get():
                 # Quitting
                 if event.type == pg.QUIT:
@@ -42,7 +57,7 @@ class Game(object):
                 self.tps_delta -= 1 / self.tps_max
             #Rendering
             pg.display.update()
-            if (self.player.pos.y > 720 or self.player.pos.y < 0 or self.player.pos.x < 1280/12 or self.player.pos.x > 1180):
+            if (self.player.pos.y > 720  or self.player.pos.x < 1280/12 or self.player.pos.x > 1180):
                 self.physics.messenger("Game Over",(255,0,0))
                 pg.display.update()
                 time.sleep(1)
@@ -55,6 +70,8 @@ class Game(object):
         self.screen.blit(self.bg, (0,self.bgX))
         self.screen.blit(self.bg, (0,self.bgX2))
         self.player.draw()
-        self.obstacles.draw()
+        self.rames.draw()
+        for obstacle in  self.obstacles:
+            obstacle.draw()
 if __name__ == "__main__":
     Game()
