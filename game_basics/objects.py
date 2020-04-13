@@ -56,22 +56,18 @@ class Obst(object):
         self.y=y
         self.width = self.game.screen.get_size()[0]/12
         self.height = self.game.screen.get_size()[1]
-        self.hitbox = pg.Rect(x,y,self.width,self.height)
     def draw(self):
-        self.hitbox = (self.x,self.y,self.width,self.height)
         self.game.screen.blit(self.game.screen,pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(0, 0, self.width, self.height)))
         self.game.screen.blit(self.game.screen, pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(self.width*12-100, 0, self.width, self.height)))
-        pg.draw.rect(self.game.screen, (255,0,0),self.hitbox,2)
-        self.hitbox = (self.width*12-100, 0, self.width-7, self.height)
-        pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
 class Lobst(object):
-    def __init__(self,game,x,y,width,height):
+    def __init__(self,game,height):
         self.game=game
-        self.x=x;
-        self.y=y;
-        self.width=width
+        self.x=0
+        self.y=0
+        self.width=random.random()*640+100
         self.height=height
-        self.hitbox=pg.Rect(x,y,width,height)
+        self.hitbox=pg.Rect(self.x,self.y,self.width,height)
     def draw(self):
         self.hitbox=(self.x,self.y,self.width,self.height)
         pg.draw.rect(self.game.screen,(255,255,255), self.hitbox)
+        pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
