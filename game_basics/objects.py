@@ -49,9 +49,19 @@ class Rocket(object):
         #Drawing
         pg.draw.polygon(self.game.screen, (0,100,255),points)
 class Obst(object):
-    def __init__(self,game):
+    def __init__(self,game,x,y):
         self.game=game
-        self.size = self.game.screen.get_size()
+        self.x=x
+        self.y=y
+        self.width = self.game.screen.get_size()[0]/12
+        self.height = self.game.screen.get_size()[1]
+        self.hitbox = pg.Rect(x,y,self.width,self.height)
     def draw(self):
-        pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(0, 0, self.size[0]/12, self.size[1]))
-        pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(self.size[0]-100, 0, self.size[0]/12, self.size[1]))
+        self.hitbox = (self.x,self.y,self.width,self.height)
+        self.game.screen.blit(self.game.screen,pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(0, 0, self.width, self.height)))
+        self.game.screen.blit(self.game.screen, pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(self.width*12-100, 0, self.width, self.height)))
+        pg.draw.rect(self.game.screen, (255,0,0),self.hitbox,2)
+        self.hitbox = (self.width*12-100, 0, self.width-7, self.height)
+        pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
+class Lobst(object):
+    def __init__(self,x,y,width,height):
