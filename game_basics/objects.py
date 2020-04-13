@@ -1,4 +1,5 @@
 import pygame as pg
+import random
 from pygame.math import Vector2
 class Rocket(object):
     def __init__(self,game):
@@ -64,4 +65,13 @@ class Obst(object):
         self.hitbox = (self.width*12-100, 0, self.width-7, self.height)
         pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
 class Lobst(object):
-    def __init__(self,x,y,width,height):
+    def __init__(self,game,x,y,width,height):
+        self.game=game
+        self.x=x;
+        self.y=y;
+        self.width=width
+        self.height=height
+        self.hitbox=pg.Rect(x,y,width,height)
+    def draw(self):
+        self.hitbox=(self.x,self.y,self.width,self.height)
+        pg.draw.rect(self.game.screen,(255,255,255), self.hitbox)
