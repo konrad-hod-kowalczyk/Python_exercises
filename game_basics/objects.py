@@ -62,9 +62,15 @@ class Obst(object):
 class Lobst(object):
     def __init__(self,game,height):
         self.game=game
-        self.x=0
+        self.r=random.randrange(0,2)
+        if self.r==0:
+            self.x=0
+            self.width = random.random() * 1000 + 100
+        else:
+            self.x=1280
+            self.width = -random.random() * 1000 - 100
         self.y=0
-        self.width=random.random()*640+100
+        #self.width=random.random()*640+100
         self.height=height
         self.hitbox=pg.Rect(self.x,self.y,self.width,height)
     def draw(self):
