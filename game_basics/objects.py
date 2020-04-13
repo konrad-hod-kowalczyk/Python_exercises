@@ -69,7 +69,7 @@ class Lobst(object):
         else:
             self.x=1280
             self.width = -random.random() * 1000 - 100
-        self.y=0
+        self.y=-50
         #self.width=random.random()*640+100
         self.height=height
         self.hitbox=pg.Rect(self.x,self.y,self.width,height)
