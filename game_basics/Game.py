@@ -17,17 +17,17 @@ class Game(object):
         self.screen = pg.display.set_mode((1280, 720))
         self.tps_clock=pg.time.Clock()
         self.tps_delta=0.0
-        pg.time.set_timer(pg.USEREVENT+1,random.randrange(2500,3500))
+        pg.time.set_timer(pg.USEREVENT+1,random.randrange(2000,3000))
         self.player=Rocket(self)
         self.rames=Obst(self,0,0)
         self.physics=Col(self)
         self.obstacles = [Lobst(self,50)]
         pg.display.set_caption("Locket Rauncher")
-        self.bg = pg.image.load(os.path.join('images', 'mg2.jpg')).convert()
+        self.bg = pg.image.load(os.path.join("images", "img2.jpg")).convert()
         self.bgX=0
+        self.count=0
         self.bgX2=self.bg.get_height()
         while True:
-            self.count += 1
             self.draw()
             if self.player.vel.y<0:
                 self.bgX -= self.player.vel.y
@@ -37,9 +37,17 @@ class Game(object):
             if self.bgX2 > self.bg.get_height() * 1:
                 self.bgX2 = -self.bg.get_height()
             for obstacle in self.obstacles:
-                obstacle.y+=1.9
-                if obstacle.y == 770:
-                    self.obstacles.pop(self.objects.index(object))
+                if self.player.vel.y < 0:
+                    obstacle.y+=1.9-self.player.vel.y
+                else:
+                    obstacle.y+=1.9
+                if(obstacle.collide(self.player.hitbox)):
+                    self.physics.messenger("Game Over", (0, 0, 255))
+                if obstacle.y > 700:
+                    self.obstacles.pop(self.obstacles.index(obstacle))
+                    self.count+=1
+                    self.physics.score(self.count)
+                    pg.display.update()
             for event in pg.event.get():
                 # Quitting
                 if event.type == pg.QUIT:
@@ -69,5 +77,6 @@ class Game(object):
         self.rames.draw()
         for obstacle in  self.obstacles:
             obstacle.draw()
+        self.physics.score(self.count)
 if __name__ == "__main__":
     Game()
