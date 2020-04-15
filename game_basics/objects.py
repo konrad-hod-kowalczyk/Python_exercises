@@ -12,7 +12,8 @@ class Rocket(object):
         self.pos = Vector2(self.size[0]/2,self.size[1]/2)
         self.vel = Vector2(0,0)
         self.acc = Vector2(0,0)
-
+        self.points = [Vector2(0, -10), Vector2(5, 5), Vector2(-5, 5)]
+        self.hitbox = (self.points)
     def add_force(self, force):
         self.acc += force
     def tick(self):
@@ -38,8 +39,7 @@ class Rocket(object):
             self.pos += self.vel
         self.acc *= 0
     def draw(self):
-        #Triangle
-        points = [Vector2(0,-10), Vector2(5,5), Vector2(-5,5)]
+        points = [Vector2(0, -10), Vector2(5, 5), Vector2(-5, 5)]
         #Rotate
         angle = self.vel.angle_to(Vector2(0,1))
         points = [p.rotate(angle) for p in points]
@@ -48,7 +48,9 @@ class Rocket(object):
         #Position
         points = [self.pos+p*5 for p in points]
         #Drawing
+        self.hitbox = (points)
         pg.draw.polygon(self.game.screen, (0,100,255),points)
+        pg.draw.polygon(self.game.screen, (255, 0, 0), self.hitbox,2)
 class Obst(object):
     def __init__(self,game,x,y):
         self.game=game
@@ -70,10 +72,33 @@ class Lobst(object):
             self.x=1280
             self.width = -random.random() * 1000 - 100
         self.y=-50
-        #self.width=random.random()*640+100
         self.height=height
+        self.type=1
         self.hitbox=pg.Rect(self.x,self.y,self.width,height)
     def draw(self):
-        self.hitbox=(self.x,self.y,self.width,self.height)
-        pg.draw.rect(self.game.screen,(255,255,255), self.hitbox)
-        pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
+        if abs(self.width) < 1280/3:
+            self.hitbox = (0, self.y, self.width, self.height)
+            pg.draw.rect(self.game.screen, (255, 255, 255), self.hitbox)
+            pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
+            self.hitbox = (1280, self.y, -self.width, self.height)
+            pg.draw.rect(self.game.screen, (255, 255, 255), self.hitbox)
+            pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
+            self.type=2
+        else:
+            self.hitbox = (self.x, self.y, self.width, self.height)
+            pg.draw.rect(self.game.screen,(255,255,255), self.hitbox)
+            pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
+    def collide(self,rect):
+        if self.type==1:
+            if self.hitbox[2] > 0:
+                if rect[0][0] < self.hitbox[0]+self.hitbox[2] or rect[1][0] < self.hitbox[0]+self.hitbox[2] or rect[2][0] < self.hitbox[0]+self.hitbox[2]:
+                    if rect[0][1] < self.hitbox[1]+self.hitbox[3] and rect[0][1] > self.hitbox[1] or rect[1][1] < self.hitbox[1]+self.hitbox[3] and rect[1][1] > self.hitbox[1] or rect[2][1] < self.hitbox[1]+self.hitbox[3] and rect[2][1] > self.hitbox[1]:
+                        return True
+            else:
+                if rect[0][0] > self.hitbox[0]+self.hitbox[2] or rect[1][0] > self.hitbox[0]+self.hitbox[2] or rect[2][0] > self.hitbox[0]+self.hitbox[2]:
+                    if rect[0][1] < self.hitbox[1]+self.hitbox[3] and rect[0][1] > self.hitbox[1] or rect[1][1] < self.hitbox[1]+self.hitbox[3] and rect[1][1] > self.hitbox[1] or rect[2][1] < self.hitbox[1]+self.hitbox[3] and rect[2][1] > self.hitbox[1]:
+                        return True
+        #else:
+            #if 0 < self.hitbox[0] + self.hitbox[2] or 0 < self.hitbox[0] + self.hitbox[2] or 0 < self.hitbox[0] + self.hitbox[2] or rect[0][0] > 1280-self.hitbox[2] or rect[1][0] > 1280-self.hitbox[2] or rect[2][0] > 1280-self.hitbox[2]:
+             #   return True
+        return False
