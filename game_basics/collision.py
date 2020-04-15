@@ -8,3 +8,8 @@ class Col(object):
         size = self.game.screen.get_size()
         text = font.render(msg, True, color)
         self.game.screen.blit(text, [size[0]/8,size[1]/3])
+    def score(self,count):
+        font = pg.font.SysFont(None, 100)
+        size = self.game.screen.get_size()
+        text = font.render(str(count), True, (0,255,0))
+        self.game.screen.blit(text, [0, size[1]/3])
