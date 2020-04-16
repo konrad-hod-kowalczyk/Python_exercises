@@ -24,6 +24,6 @@ class Col(object):
         self.game.screen.blit(text, [0, size[1]/3])
         f = open("highscore.txt", "r")
         font = pg.font.SysFont(None, 50)
-        text = font.render("HS" + f.read(), True, (0, 255, 0))
+        text = font.render("HS:" + f.read(), True, (0, 255, 0))
         f.close()
         self.game.screen.blit(text, [0, size[1] / 2])
