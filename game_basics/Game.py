@@ -22,7 +22,7 @@ class Game(object):
         self.physics=Col(self)
         self.obstacles = [Lobst(self,50)]
         pg.display.set_caption("Locket Rauncher")
-        self.bg = pg.image.load("img2.jpg")
+        self.bg = pg.image.load("img2.jpg").convert()
         self.bgX=0
         self.count=0
         self.bgX2=self.bg.get_height()
