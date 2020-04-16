@@ -6,7 +6,6 @@ from objects import Obst
 from objects import Lobst
 from collision import Col
 import random
-import time
 
 class Game(object):
     def __init__(self):
@@ -23,10 +22,11 @@ class Game(object):
         self.physics=Col(self)
         self.obstacles = [Lobst(self,50)]
         pg.display.set_caption("Locket Rauncher")
-        self.bg = pg.image.load(os.path.join("images", "img2.jpg")).convert()
+        self.bg = pg.image.load("img2.jpg")
         self.bgX=0
         self.count=0
         self.bgX2=self.bg.get_height()
+        self.count=0
         while True:
             self.draw()
             if self.player.vel.y<0:
@@ -42,7 +42,7 @@ class Game(object):
                 else:
                     obstacle.y+=1.9
                 if(obstacle.collide(self.player.hitbox)):
-                    self.physics.messenger("Game Over", (0, 0, 255))
+                    self.physics.messenger("Game Over", (255, 0, 0))
                 if obstacle.y > 700:
                     self.obstacles.pop(self.obstacles.index(obstacle))
                     self.count+=1
@@ -63,9 +63,6 @@ class Game(object):
             pg.display.update()
             if (self.player.pos.y > 720  or self.player.pos.x < 1280/12 or self.player.pos.x > 1180):
                 self.physics.messenger("Game Over",(255,0,0))
-                pg.display.update()
-                time.sleep(1)
-                exit(0)
     def tick(self):
         # Input
         self.player.tick()
