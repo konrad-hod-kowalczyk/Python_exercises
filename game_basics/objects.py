@@ -99,7 +99,7 @@ class Lobst(object):
                     if rect[0][1] < self.hitbox[1]+self.hitbox[3] and rect[0][1] > self.hitbox[1] or rect[1][1] < self.hitbox[1]+self.hitbox[3] and rect[1][1] > self.hitbox[1] or rect[2][1] < self.hitbox[1]+self.hitbox[3] and rect[2][1] > self.hitbox[1]:
                         return True
         else:
-            if rect[0][0] <  abs(self.hitbox[2]) or rect[1][0] < abs(self.hitbox[2]) or rect[2][0] <  abs(self.hitbox[2]) or rect[0][0] > 1280-self.hitbox[2] or rect[1][0] > 1280-self.hitbox[2] or rect[2][0] > 1280-self.hitbox[2]:
+            if rect[0][0] <  abs(self.hitbox[2]) or rect[1][0] < abs(self.hitbox[2]) or rect[2][0] <  abs(self.hitbox[2]) or rect[0][0] > self.hitbox[0]+self.hitbox[2] or rect[1][0] > self.hitbox[0]+self.hitbox[2] or rect[2][0] > self.hitbox[0]+self.hitbox[2]:
                 if rect[0][1] < self.hitbox[1] + self.hitbox[3] and rect[0][1] > self.hitbox[1] or rect[1][1] < self.hitbox[1] + self.hitbox[3] and rect[1][1] > self.hitbox[1] or rect[2][1] < self.hitbox[1] + self.hitbox[3] and rect[2][1] > self.hitbox[1]:
                     return True
         return False
