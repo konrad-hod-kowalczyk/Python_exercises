@@ -1,4 +1,5 @@
 import pygame as pg
+import sys
 def start():
     pg.font.init()
     font = pg.font.SysFont(None, 50)
@@ -17,6 +18,9 @@ def start():
         pg.draw.rect(screen, (50, 50, 50), pg.Rect(490, 350, 300, 100))
         text = font.render("Hard", True, (255, 0, 0))
         screen.blit(text, [590, 375])
+        pg.draw.rect(screen, (50, 50, 50), pg.Rect(490, 500, 300, 100))
+        text = font.render("Tunnel", True, (150, 75, 0))
+        screen.blit(text, [570, 530])
         pg.display.update()
         for event in pg.event.get():
             if event.type == pg.QUIT:
