@@ -30,7 +30,6 @@ def start():
                     return 1000
             if mysz[0] > 490 and mysz[0] < 790 and mysz[1] > 200 and mysz[1] < 300:
                 pg.draw.rect(screen, (0, 0, 50), pg.Rect(490, 200, 300, 100))
-                pg.draw.rect(screen, (50, 50, 50), pg.Rect(490, 200, 300, 100))
                 text = font.render("Medium", True, (255, 255, 0))
                 screen.blit(text, [570, 225])
                 pg.display.update()
