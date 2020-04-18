@@ -6,17 +6,19 @@ from objects import Obst
 from objects import Lobst
 from collision import Col
 import random
-
+from start import start
 class Game(object):
-    def __init__(self):
+    def __init__(self,x):
         # Configuration
+        pg.mouse.set_visible(False)
         self.tps_max = 60.0
         #initalization
         pg.init()
         self.screen = pg.display.set_mode((1280, 720))
         self.tps_clock=pg.time.Clock()
         self.tps_delta=0.0
-        pg.time.set_timer(pg.USEREVENT+1,random.randrange(2000,3000))
+        self.x=x
+        pg.time.set_timer(pg.USEREVENT+1,random.randrange(self.x,self.x+1000))
         self.player=Rocket(self)
         self.rames=Obst(self,0,0)
         self.physics=Col(self)
@@ -38,9 +40,9 @@ class Game(object):
                 self.bgX2 = -self.bg.get_height()
             for obstacle in self.obstacles:
                 if self.player.vel.y < 0:
-                    obstacle.y+=1.9-self.player.vel.y
+                    obstacle.y += 1.9-self.player.vel.y
                 else:
-                    obstacle.y+=1.9
+                    obstacle.y += 1.9
                 if(obstacle.collide(self.player.hitbox)):
                     self.physics.messenger("Game Over", (255, 0, 0))
                 if obstacle.y > 700:
@@ -75,5 +77,6 @@ class Game(object):
         for obstacle in  self.obstacles:
             obstacle.draw()
         self.physics.score(self.count)
+h=start()
 if __name__ == "__main__":
-    Game()
+    Game(h)
