@@ -17,14 +17,13 @@ class Col(object):
         text = font.render(msg, True, color)
         self.game.screen.blit(text, [size[0]/8,size[1]/3])
         pg.display.update()
-        f = open("highscore.txt", "r+")
-        for i in range(0,self.x):
-            line=""
-            line=f.readline()
-        if(self.game.count>int(line)):
-            f.seek(self.x,1)
-            f.write(str(self.game.count))
-        f.close()
+        with open("highscore.txt", "r") as file:
+            lines = file.readlines()
+        if(self.game.count>int(lines[self.x-1])):
+            lines[self.x-1]=str(self.game.count)+"\n"
+        with open("highscore.txt", "w") as file:
+            for line in lines:
+                file.write(line)
         time.sleep(1)
         exit(0)
     def score(self,count):
