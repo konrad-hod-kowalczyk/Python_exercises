@@ -21,7 +21,7 @@ class Game(object):
         pg.time.set_timer(pg.USEREVENT+1,random.randrange(self.x,self.x+1000))
         self.player=Rocket(self)
         self.rames=Obst(self,0,0)
-        self.physics=Col(self)
+        self.physics=Col(self,self.x)
         self.obstacles = [Lobst(self,50)]
         pg.display.set_caption("Locket Rauncher")
         self.bg = pg.image.load("img2.jpg").convert()
