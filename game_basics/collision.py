@@ -10,6 +10,11 @@ class Col(object):
             self.x=2
         elif x==300:
             self.x=3
+        f = open("highscore.txt", "r")
+        for i in range(0, self.x):
+            self.line = ""
+            self.line = f.readline()
+        f.close()
     def messenger(self,msg,color):
         line=""
         font = pg.font.SysFont(None, 250)
@@ -27,16 +32,10 @@ class Col(object):
         time.sleep(1)
         exit(0)
     def score(self,count):
-        line=""
         font = pg.font.SysFont(None, 100)
         size = self.game.screen.get_size()
         text = font.render(str(count), True, (0,255,0))
         self.game.screen.blit(text, [0, size[1]/3])
-        f = open("highscore.txt", "r")
-        for i in range(0,self.x):
-            line=""
-            line=f.readline()
         font = pg.font.SysFont(None, 50)
-        text = font.render("HS:" + line, True, (0, 255, 0))
-        f.close()
+        text = font.render("HS:" + self.line, True, (0, 255, 0))
         self.game.screen.blit(text, [0, size[1] / 2])
