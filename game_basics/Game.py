@@ -18,11 +18,14 @@ class Game(object):
         self.tps_clock=pg.time.Clock()
         self.tps_delta=0.0
         self.x=x
-        pg.time.set_timer(pg.USEREVENT+1,random.randrange(self.x,self.x+1000))
+        if self.x==400:
+            pg.time.set_timer(pg.USEREVENT + 1,self.x)
+        else:
+            pg.time.set_timer(pg.USEREVENT+1,random.randrange(self.x,self.x+1000))
         self.player=Rocket(self)
         self.rames=Obst(self,0,0)
         self.physics=Col(self,self.x)
-        self.obstacles = [Lobst(self,50)]
+        self.obstacles = [Lobst(self,50,self.x)]
         pg.display.set_caption("Locket Rauncher")
         self.bg = pg.image.load("img2.jpg").convert()
         self.bgX=0
@@ -55,7 +58,7 @@ class Game(object):
                 if event.type == pg.QUIT:
                     sys.exit(0)
                 if event.type == pg.USEREVENT+1:
-                    self.obstacles.append(Lobst(self, 50))
+                    self.obstacles.append(Lobst(self, 50,self.x))
             # Ticking
             self.tps_delta += self.tps_clock.tick() / 1000.0
             while self.tps_delta > 1 / self.tps_max:
