@@ -46,3 +46,10 @@ def start():
                 pg.display.update()
                 if pg.mouse.get_pressed()[0]:
                     return 300
+            if mysz[0] > 490 and mysz[0] < 790 and mysz[1] > 500 and mysz[1] < 650:
+                pg.draw.rect(screen, (0, 0, 50), pg.Rect(490, 500, 300, 100))
+                text = font.render("Tunnel", True, (150, 75, 0))
+                screen.blit(text, [570, 530])
+                pg.display.update()
+                if pg.mouse.get_pressed()[0]:
+                    return 400
