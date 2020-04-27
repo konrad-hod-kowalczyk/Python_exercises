@@ -62,32 +62,48 @@ class Obst(object):
         self.game.screen.blit(self.game.screen,pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(0, 0, self.width, self.height)))
         self.game.screen.blit(self.game.screen, pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(self.width*12-100, 0, self.width, self.height)))
 class Lobst(object):
-    def __init__(self,game,height):
+    def __init__(self,game,height,h):
+        self.h=h
         self.game=game
-        self.r=random.randrange(0,2)
-        if self.r==0:
+        if self.h==400:
             self.x=0
-            self.width = random.random() * 1000 + 100
+            self.width=random.random() * 540 + 100
         else:
-            self.x=1280
-            self.width = -random.random() * 1000 - 100
+            self.r=random.randrange(0,2)
+            if self.r==0:
+                self.x=0
+                self.width = random.random() * 1000 + 100
+            else:
+                self.x=1280
+                self.width = -random.random() * 1000 - 100
         self.y=-50
         self.height=height
         self.type=1
         self.hitbox=pg.Rect(self.x,self.y,self.width,height)
     def draw(self):
-        if abs(self.width) < 1280/3:
-            self.hitbox = (0, self.y, self.width, self.height)
+        if self.h==400:
+            self.hitbox = (0, self.y, abs(self.width), self.height)
             pg.draw.rect(self.game.screen, (255, 255, 255), self.hitbox)
             pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
-            self.hitbox = (1280, self.y, -self.width, self.height)
+            self.hitbox = (1280, self.y, -abs(1280-100-self.width), self.height)
             pg.draw.rect(self.game.screen, (255, 255, 255), self.hitbox)
             pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
-            self.type=2
+            self.type = 2
         else:
-            self.hitbox = (self.x, self.y, self.width, self.height)
-            pg.draw.rect(self.game.screen,(255,255,255), self.hitbox)
-            pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
+            if abs(self.width) < 1280/5+1280/4:
+                if abs(self.width) < 1280 / 8:
+                    self.width = self.width*2
+                self.hitbox = (0, self.y, abs(self.width), self.height)
+                pg.draw.rect(self.game.screen, (255, 255, 255), self.hitbox)
+                pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
+                self.hitbox = (1280, self.y, -abs(self.width), self.height)
+                pg.draw.rect(self.game.screen, (255, 255, 255), self.hitbox)
+                pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
+                self.type=2
+            else:
+                self.hitbox = (self.x, self.y, self.width, self.height)
+                pg.draw.rect(self.game.screen,(255,255,255), self.hitbox)
+                pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
     def collide(self,rect):
         if self.type==1:
             if self.hitbox[2] > 0:
