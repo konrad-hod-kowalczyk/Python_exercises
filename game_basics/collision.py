@@ -10,6 +10,8 @@ class Col(object):
             self.x=2
         elif x==300:
             self.x=3
+        elif x == 400:
+            self.x = 4
         f = open("highscore.txt", "r")
         for i in range(0, self.x):
             self.line = ""
