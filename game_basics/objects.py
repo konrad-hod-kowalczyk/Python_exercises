@@ -62,12 +62,12 @@ class Obst(object):
         self.game.screen.blit(self.game.screen,pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(0, 0, self.width, self.height)))
         self.game.screen.blit(self.game.screen, pg.draw.rect(self.game.screen, (255, 255, 255), pg.Rect(self.width*12-100, 0, self.width, self.height)))
 class Lobst(object):
-    def __init__(self,game,height,h):
+    def __init__(self,game,height,h,w):
         self.h=h
         self.game=game
         if self.h==400:
             self.x=0
-            self.width=random.random() * 540 + 100
+            self.width=w
         else:
             self.r=random.randrange(0,2)
             if self.r==0:
@@ -85,10 +85,10 @@ class Lobst(object):
             self.hitbox = (0, self.y, abs(self.width), self.height)
             pg.draw.rect(self.game.screen, (255, 255, 255), self.hitbox)
             pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
-            self.hitbox = (1280, self.y, -abs(1280-100-self.width), self.height)
+            self.hitbox = (1280, self.y, -abs(1280-150-self.width), self.height)
             pg.draw.rect(self.game.screen, (255, 255, 255), self.hitbox)
             pg.draw.rect(self.game.screen, (255, 0, 0), self.hitbox, 2)
-            self.type = 2
+            self.type = 3
         else:
             if abs(self.width) < 1280/5+1280/4:
                 if abs(self.width) < 1280 / 8:
@@ -114,8 +114,12 @@ class Lobst(object):
                 if rect[0][0] > self.hitbox[0]+self.hitbox[2] or rect[1][0] > self.hitbox[0]+self.hitbox[2] or rect[2][0] > self.hitbox[0]+self.hitbox[2]:
                     if rect[0][1] < self.hitbox[1]+self.hitbox[3] and rect[0][1] > self.hitbox[1] or rect[1][1] < self.hitbox[1]+self.hitbox[3] and rect[1][1] > self.hitbox[1] or rect[2][1] < self.hitbox[1]+self.hitbox[3] and rect[2][1] > self.hitbox[1]:
                         return True
-        else:
+        elif self.type==2:
             if rect[0][0] <  abs(self.hitbox[2]) or rect[1][0] < abs(self.hitbox[2]) or rect[2][0] <  abs(self.hitbox[2]) or rect[0][0] > self.hitbox[0]+self.hitbox[2] or rect[1][0] > self.hitbox[0]+self.hitbox[2] or rect[2][0] > self.hitbox[0]+self.hitbox[2]:
                 if rect[0][1] < self.hitbox[1] + self.hitbox[3] and rect[0][1] > self.hitbox[1] or rect[1][1] < self.hitbox[1] + self.hitbox[3] and rect[1][1] > self.hitbox[1] or rect[2][1] < self.hitbox[1] + self.hitbox[3] and rect[2][1] > self.hitbox[1]:
+                    return True
+        else:
+            if rect[0][0]  > abs(self.hitbox[0]+self.hitbox[2]) or rect[1][0]  > abs(self.hitbox[0]+self.hitbox[2]) or rect[2][0]  > abs(self.hitbox[0]+self.hitbox[2]) or rect[0][0] < abs(self.hitbox[0]-150+self.hitbox[2]) or rect[1][0] < abs(self.hitbox[0]-150+self.hitbox[2]) or rect[2][0] < abs(self.hitbox[0]-150+self.hitbox[2]):
+                if rect[0][1] < self.hitbox[1]+self.hitbox[3] and rect[0][1] > self.hitbox[1]  or rect[1][1] < self.hitbox[1] + self.hitbox[3] and rect[1][1] > self.hitbox[1] or rect[2][1] < self.hitbox[1] + self.hitbox[3] and rect[2][1] > self.hitbox[1]:
                     return True
         return False
