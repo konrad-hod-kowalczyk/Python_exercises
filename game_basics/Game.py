@@ -22,7 +22,7 @@ class Game(object):
         if self.x==400:
             pg.time.set_timer(pg.USEREVENT + 1,self.x)
             pg.time.set_timer(pg.USEREVENT,self.x*10)
-            self.t=10
+            self.t=20
         else:
             pg.time.set_timer(pg.USEREVENT+1,random.randrange(self.x,self.x+1000))
             self.t=0
