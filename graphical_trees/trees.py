@@ -7,7 +7,7 @@ tab=[]
 for i in range(size):
   tab.append(i+1)
 points=[];
-while True:
+def initialisation():
   help=[];
   h=size;
   rang=math.floor(random.random() * h)
