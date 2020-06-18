@@ -11,3 +11,5 @@ while True:
   help=[];
   h=size;
   rang=math.floor(random.random() * h)
+  for i in range(rang):
+    help.append(tab[math.floor(random.random() * h)])
