@@ -6,4 +6,8 @@ size=math.floor(random.random() * 50)
 tab=[]
 for i in range(size):
   tab.append(i+1)
-points=
+points=[];
+while True:
+  help=[];
+  h=size;
+  rang=math.floor(random.random() * h)
