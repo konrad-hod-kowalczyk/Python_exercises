@@ -10,6 +10,7 @@ def initialisation():
   rang=math.floor(random.random() * h)
   for i in range(rang):
     help.append(tab[math.floor(random.random() * h)])
+  points.append(branch(n,help))
   for i in len(help):
     initialisation(table,help[i])
 size=math.floor(random.random() * 50)
