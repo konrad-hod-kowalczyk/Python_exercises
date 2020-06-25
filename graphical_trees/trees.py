@@ -6,6 +6,7 @@ def initialisation(table,n,s,rang):
     global points
     table.remove(n)
     if rang==0:
+        points.append(branch(n,[0]))
         return 0
     print(table)
     help=[]
