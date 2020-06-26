@@ -5,30 +5,35 @@ from branches import branch
 def initialisation(table,n,s,rang):
     global points
     table.remove(n)
-    if rang==0:
-        points.append(branch(n,(0)))
+    if rang==0 or len(table)==0:
+        points.append(branch(n, [0]))
         return 0
-    print(table)
+    print("------------")
+    print("table=",table)
     help=[]
     h=s
-    print(h)
+    print("h=",h)
     #rang=math.floor(random.random() * h)
-    tabtab=table
+    tabtab=[]
+    for i in range(len(table)):
+        tabtab.append(table[i])
     for i in range(rang):
         h -= 1
         print("h=", h)
         t=math.floor(random.random() * h)
         print("t=",t)
         print("table[t]=", tabtab[t])
-        help.append(table[t])
+        help.append(tabtab[t])
         print("help=",help)
         tabtab.remove(tabtab[t])
-        print("table=",table)
+        print("table=",tabtab)
     points.append(branch(n,help))
     for i in range(len(help)):
-        r = math.floor(random.random() * (h - rang + 2))
-        print(r)
-        rang-=r
+        r = math.floor(random.random() * (h - rang + 1))
+        print("r=",r)
+        print("help=",help[i])
+        print("table=",table)
+        rang+=r
         initialisation(table,help[i],h,r)
 #size=math.floor(random.random() * 50)
 size=5
