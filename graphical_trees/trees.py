@@ -31,7 +31,8 @@ def initialisation(table,n,s,rang):
     for i in range(len(help)):
         r = math.floor(random.random() * (h - rang + 1))
         print("r=",r)
-        print("help=",help[i])
+        print("help=",help)
+        print("help[i]=", help[i])
         print("table=",table)
         rang+=r
         initialisation(table,help[i],h,r)
