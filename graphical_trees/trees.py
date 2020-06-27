@@ -2,8 +2,9 @@ import pygame as pg
 import random
 import math
 from branches import branch
-def initialisation(table,n,s,rang):
+def initialisation(n,s,rang):
     global points
+    global table
     table.remove(n)
     if rang==0 or len(table)==0:
         return 0
@@ -17,6 +18,9 @@ def initialisation(table,n,s,rang):
     for i in range(len(table)):
         tabtab.append(table[i])
     for i in range(rang):
+        if len(tabtab)==0:
+            rang=len(help)
+            break
         h -= 1
         print("h=", h)
         t=math.floor(random.random() * h)
@@ -28,21 +32,24 @@ def initialisation(table,n,s,rang):
         print("table=",tabtab)
     points.append(branch(n,help))
     for i in range(len(help)):
-        r = math.floor(random.random() * (h - rang + 1))
+        r = math.floor(random.random() * (h - rang + 2))
         print("r=",r)
         print("help=",help)
         print("help[i]=", help[i])
         print("table=",table)
         rang+=r
-        initialisation(table,help[i],h,r)
+        if help[i] not in table:
+            help.remove(help[i])
+            continue
+        initialisation(help[i],h,r)
 #size=math.floor(random.random() * 50)
 size=5
-tab=[]
+table=[]
 for i in range(size):
-    tab.append(i+1)
+    table.append(i+1)
     #print(tab)
 points=[]
-initialisation(tab,tab[0],size,2)
+initialisation(table[0],size,2)
 print("########################################")
 for i in range(len(points)):
     print(points[i].number)
