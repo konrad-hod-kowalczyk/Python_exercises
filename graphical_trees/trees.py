@@ -43,5 +43,7 @@ for i in range(size):
     #print(tab)
 points=[]
 initialisation(tab,tab[0],size,2)
-print(points[0].number)
-print(points[0].tuple)
+print("########################################")
+for i in range(len(points)):
+    print(points[i].number)
+    print(points[i].tuple)
