@@ -4,10 +4,10 @@ def create_phone_number(n):
     for number in n:
         if i==0:
             x=x+"("
-        x=x+str(n[i])
         if i==2:
             x=x+") "
         if i==5:
             x=x+"-"
+        x=x+str(n[i])
         i=i+1
     return x
