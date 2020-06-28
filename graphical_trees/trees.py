@@ -38,7 +38,7 @@ def initialisation(n,s,rang):
         print("help[i]=", help[i])
         print("table=",table)
         rang+=r
-        if help[i] not in table:
+        if help[i] not in table: #that's solving the problem for graphs and not for every tree
             help.remove(help[i])
             continue
         initialisation(help[i],h,r)
