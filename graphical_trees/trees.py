@@ -6,12 +6,12 @@ def initialisation(n,s,rang):
     global points
     global table
     table.remove(n)
-    if rang==0 or len(table)==0:
+    if rang<=0 or len(table)==0:
         return 0
     print("------------")
     print("table=",table)
     help=[]
-    h=s
+    h=len(table)
     print("h=",h)
     #rang=math.floor(random.random() * h)
     tabtab=[]
@@ -22,6 +22,7 @@ def initialisation(n,s,rang):
             rang=len(help)
             break
         h -= 1
+        print("****")
         print("h=", h)
         t=math.floor(random.random() * h)
         print("t=",t)
@@ -38,7 +39,7 @@ def initialisation(n,s,rang):
         print("help[i]=", help[i])
         print("table=",table)
         rang+=r
-        if help[i] not in table: #that's solving the problem for graphs and not for every tree
+        if help[i] not in table:
             help.remove(help[i])
             continue
         initialisation(help[i],h,r)
@@ -49,7 +50,7 @@ for i in range(size):
     table.append(i+1)
     #print(tab)
 points=[]
-initialisation(table[0],size,2)
+initialisation(table[0],size,4)
 print("########################################")
 for i in range(len(points)):
     print(points[i].number)
