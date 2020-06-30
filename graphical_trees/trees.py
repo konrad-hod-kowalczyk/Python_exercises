@@ -8,12 +8,15 @@ def initialisation(n,s,rang):
     table.remove(n)
     if rang<=0 or len(table)==0:
         return 0
+    if rang>len(table):
+        rang=len(table)
     print("------------")
     print("table=",table)
     help=[]
     h=len(table)
     print("h=",h)
-    #rang=math.floor(random.random() * h)
+    print("range=", rang)
+    #rang=math.floor(random.random() * (h-1))
     tabtab=[]
     for i in range(len(table)):
         tabtab.append(table[i])
@@ -36,6 +39,7 @@ def initialisation(n,s,rang):
         r = math.floor(random.random() * (h - rang + 2))
         print("r=",r)
         print("help=",help)
+        print("i=",i)
         print("help[i]=", help[i])
         print("table=",table)
         rang+=r
@@ -43,14 +47,16 @@ def initialisation(n,s,rang):
             help.remove(help[i])
             continue
         initialisation(help[i],h,r)
-#size=math.floor(random.random() * 50)
-size=5
+size=math.floor(random.random() * 50)
+#size=5
 table=[]
 for i in range(size):
     table.append(i+1)
     #print(tab)
 points=[]
-initialisation(table[0],size,4)
+rr=math.floor(random.random()*(size-1))+1
+print("first range=",rr)
+initialisation(table[0],size,rr)
 print("########################################")
 for i in range(len(points)):
     print(points[i].number)
