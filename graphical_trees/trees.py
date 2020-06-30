@@ -36,7 +36,9 @@ def initialisation(n,s,rang):
         print("table=",tabtab)
     points.append(branch(n,help))
     for i in range(len(help)):
-        r = math.floor(random.random() * (h - rang + 2))
+        if i>=len(help):
+            break
+        r = math.floor(random.random() * (h - rang+2))
         print("r=",r)
         print("help=",help)
         print("i=",i)
@@ -47,7 +49,7 @@ def initialisation(n,s,rang):
             help.remove(help[i])
             continue
         initialisation(help[i],h,r)
-size=math.floor(random.random() * 50)
+size=math.floor(random.random() * 50)+1
 #size=5
 table=[]
 for i in range(size):
@@ -56,8 +58,11 @@ for i in range(size):
 points=[]
 rr=math.floor(random.random()*(size-1))+1
 print("first range=",rr)
+print(table)
 initialisation(table[0],size,rr)
 print("########################################")
 for i in range(len(points)):
     print(points[i].number)
     print(points[i].tuple)
+#pg.init()
+#pg.quit()
