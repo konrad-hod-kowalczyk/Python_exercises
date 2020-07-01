@@ -29,7 +29,7 @@ def initialisation(n,rang):
         #print("h=", h)
         t=math.floor(random.random() * h)
         if tabtab[t] in banned:
-            h+=1
+            h-=1
             continue
         #print("t=",t)
         #print("table[t]=", tabtab[t])
