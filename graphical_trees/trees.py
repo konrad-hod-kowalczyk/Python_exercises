@@ -29,6 +29,12 @@ def initialisation(n,rang):
         #print("h=", h)
         t=math.floor(random.random() * h)
         if tabtab[t] in banned:
+            t=-1
+            for i in range(len(tabtab)):
+                t+=1
+                if tabtab[t] not in banned:
+                    break
+        if tabtab[t] in banned:
             h-=1
             continue
         #print("t=",t)
@@ -43,10 +49,10 @@ def initialisation(n,rang):
         if i>=len(help):
             break
         r = math.floor(random.random() * (h - rang+2))+1
-        #print("r=",r)
-        #print("help=",help)
+        print("r=",r)
+        print("help=",help)
         #print("i=",i)
-        #print("help[i]=", help[i])
+        print("help[i]=", help[i])
         #print("table=",table)
         rang+=r
         #if help[i] not in table:
