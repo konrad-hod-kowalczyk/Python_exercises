@@ -48,7 +48,7 @@ def initialisation(n,rang):
     for i in range(len(help)):
         if i>=len(help):
             break
-        r = math.floor(random.random() * (h - len(banned)))
+        r = math.floor(random.random() * (h - len(banned)+rang))
         print("r=",r)
         #print("help=",help)
         #print("i=",i)
