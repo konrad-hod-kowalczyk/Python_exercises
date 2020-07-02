@@ -48,19 +48,19 @@ def initialisation(n,rang):
     for i in range(len(help)):
         if i>=len(help):
             break
-        r = math.floor(random.random() * (h - len(banned)+rang))
+        r = math.floor(random.random() * (h-rang))
         print("r=",r)
         #print("help=",help)
         #print("i=",i)
-        #print("help[i]=", help[i])
+        print("help[i]=", help[i])
         #print("table=",table)
-        #rang+=r
+        rang+=r
         #if help[i] not in table:
          #   help.remove(help[i])
          #   continue
         initialisation(help[i],r)
 size=math.floor(random.random() * 50)+1
-#size=5
+size=10
 table=[]
 for i in range(size):
     table.append(i+1)
