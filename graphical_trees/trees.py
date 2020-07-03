@@ -46,8 +46,9 @@ def initialisation(n,rang):
         #print("table=",tabtab)
     points.append(branch(n,help))
     for i in range(len(help)):
-        if i>=len(help):
+        if i>=len(help) or len(table)==0:
             break
+        h = len(table)
         r = math.floor(random.random() * (h-rang))
         print("r=",r)
         #print("help=",help)
