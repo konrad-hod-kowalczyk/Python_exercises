@@ -1,12 +1,12 @@
 import random
 import math
 from branches import branch
-def initialisation(n,rang):
+def initialisation(n,rang,max):
     global points
     global table
     global banned
     table.remove(n)
-    if rang<=0 or len(table)==0:
+    if rang<=0 or len(table)==0 or len(banned)==max-1:
         return 0
     if rang>len(table):
         rang=len(table)
@@ -50,16 +50,17 @@ def initialisation(n,rang):
             break
         h = len(table)
         r = math.floor(random.random() * (h-rang))
-        print("r=",r)
+        #print("r=",r)
         #print("help=",help)
         #print("i=",i)
-        print("help[i]=", help[i])
+        #print("help[i]=", help[i])
         #print("table=",table)
+        #print("banned=",banned)
         rang+=r
         #if help[i] not in table:
          #   help.remove(help[i])
          #   continue
-        initialisation(help[i],r)
+        initialisation(help[i],r,max)
 size=math.floor(random.random() * 50)+1
 size=10
 table=[]
@@ -70,7 +71,7 @@ points=[]
 banned=[]
 rr=math.floor(random.random()*(size/2))+1
 #print("first range=",rr)
-initialisation(table[0],rr)
+initialisation(table[0],rr,table[size-1])
 #print("########################################")
 for i in range(len(points)):
     print(points[i].number)
