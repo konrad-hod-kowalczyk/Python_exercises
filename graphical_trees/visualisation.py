@@ -4,7 +4,15 @@ import sys
 screen = pg.display.set_mode((1280,720))
 class visualisation():
     def __init__(self,pointstab,tab):
-
+        self.lines=[]
+        self.lines.append(len(tab)+1)
+        for i in range(len(pointstab)):
+            if i==0:
+                continue
+            elif i==1:
+                self.lines.append(pointstab[i].tuple)
+            else:
+                #???
         while True:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
