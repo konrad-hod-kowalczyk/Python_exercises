@@ -10,8 +10,12 @@ class visualisation():
             if i==0:
                 self.lines.append(pointstab[i].tuple)
             else:
-                ct=0;
-                
+                help=[];
+                h=i;
+                for j in range(len(pointstab)):
+                    if pointstab[h].number in pointstab[j].tuple and pointstab[j].number==1:
+                        help.append(pointstab[i].tuple)
+                self.lines.append(help)
                 
         while True:
             for event in pg.event.get():
