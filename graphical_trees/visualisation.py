@@ -8,11 +8,11 @@ class visualisation():
         self.lines.append(len(tab)+1)
         for i in range(len(pointstab)):
             if i==0:
-                continue
-            elif i==1:
                 self.lines.append(pointstab[i].tuple)
             else:
-                #???
+                ct=0;
+                
+                
         while True:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
