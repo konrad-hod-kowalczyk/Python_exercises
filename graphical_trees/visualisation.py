@@ -15,6 +15,7 @@ class visualisation():
                 for j in range(len(pointstab)):
                     if pointstab[h].number in pointstab[j].tuple and pointstab[j].number==1:
                         help.append(pointstab[i].tuple)
+                    i=j
                 self.lines.append(help)
                 
         while True:
