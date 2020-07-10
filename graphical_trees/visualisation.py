@@ -14,7 +14,7 @@ class visualisation():
                 help = []
                 counter=0
                 for j in range(len(pointstab)):
-                    if pointstab[i].number in pointstab[j].tuple and pointstab[j].number == 1:
+                    if pointstab[i].number in pointstab[j].tuple and pointstab[j].number in self.lines:
                         help.append(pointstab[i].tuple)
                         i = j
                         counter+=1
