@@ -1,6 +1,7 @@
 import random
 import math
 from branches import branch
+from visualisation import visualisation
 def initialisation(n,rang,max):
     global points
     global table
@@ -76,3 +77,4 @@ initialisation(table[0],rr,table[size-1])
 for i in range(len(points)):
     print(points[i].number)
     print(points[i].tuple)
+vis=visualisation(points,table)
