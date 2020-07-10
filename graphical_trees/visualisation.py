@@ -13,10 +13,15 @@ class visualisation():
             else:
                 help = []
                 for j in range(len(pointstab)):
-                    if pointstab[i].number in pointstab[j].tuple and pointstab[j].number in self.lines:
-                        help.append(pointstab[i].tuple)
-
+                    parent=-1
+                    for k in range(len(self.lines)):
+                        if pointstab[j].number in self.lines[k]:
+                            parent=k
+                    if pointstab[i].number in pointstab[j].tuple and parent!=-1:
+                        for k in range(len(pointstab[i].tuple)):
+                            help.append(pointstab[i].tuple[k])
                 self.lines.append(help)
+        print(self.lines)
         while True:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
