@@ -22,6 +22,7 @@ class visualisation():
                             help.append(pointstab[i].tuple[k])
                 self.lines.append(help)
         print(self.lines)
+        self.height=720/len(self.lines)
         while True:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
