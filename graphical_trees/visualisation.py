@@ -21,11 +21,16 @@ class visualisation():
                         for k in range(len(pointstab[i].tuple)):
                             help.append(pointstab[i].tuple[k])
                 self.lines.append(help)
-        print(self.lines)
         self.height=720/len(self.lines)
+        print(self.lines)
         while True:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     sys.exit(0)
+            for i in range(len(self.lines)):
+                w=len(self.lines[i])
+                for j in range(w):
+                    pg.draw.circle(screen,(255,255,255),(int(1280/w),50),5)
+                    w-=1
             pg.draw.line(screen,(255,255,255),(1280/2,10),(1280/3,100),1)
             pg.display.update()
