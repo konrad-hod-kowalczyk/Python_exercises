@@ -27,10 +27,11 @@ class visualisation():
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     sys.exit(0)
+            h = self.height
             for i in range(len(self.lines)):
                 w=len(self.lines[i])
                 for j in range(w):
-                    pg.draw.circle(screen,(255,255,255),(int(1280/w),50),5)
-                    w-=1
-            pg.draw.line(screen,(255,255,255),(1280/2,10),(1280/3,100),1)
+                    pg.draw.circle(screen,(255,255,255),(int(1280/w),int(h)),5)
+                    w+=1
+                h+=self.height
             pg.display.update()
