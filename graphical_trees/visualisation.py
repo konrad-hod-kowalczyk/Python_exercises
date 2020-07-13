@@ -30,8 +30,12 @@ class visualisation():
             h = 50
             for i in range(len(self.lines)):
                 w=len(self.lines[i])
+                if w * 50 > 640:
+                    center = 1280 / 2 - (w * 50) % 640
+                else:
+                    center=1280/2
                 for j in range(w):
-                    pg.draw.circle(screen,(255,255,255),(int(1280-w-1280/2),int(h)),5)
+                    pg.draw.circle(screen,(255,255,255),(int(1280-w-center),int(h)),5)
                     w+=50
                 h+=self.height
             pg.display.update()
