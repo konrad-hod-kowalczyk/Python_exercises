@@ -23,19 +23,22 @@ class visualisation():
                 self.lines.append(help)
         self.height=720/len(self.lines)
         print(self.lines)
+        points=[]
+        h=50
+        for i in range(len(self.lines)):
+            w = len(self.lines[i])
+            if w * 50 > 640:
+                center = 1280 / 2 - (w * 50) % 640
+            else:
+                center = 1280 / 2
+            for j in range(w):
+                points.append((int(1280-w-center),int(h)))
+                w += 50
+            h += self.height
         while True:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     sys.exit(0)
-            h = 50
-            for i in range(len(self.lines)):
-                w=len(self.lines[i])
-                if w * 50 > 640:
-                    center = 1280 / 2 - (w * 50) % 640
-                else:
-                    center=1280/2
-                for j in range(w):
-                    pg.draw.circle(screen,(255,255,255),(int(1280-w-center),int(h)),5)
-                    w+=50
-                h+=self.height
+            for i in range(len(points)):
+                pg.draw.circle(screen, (255, 255, 255), (points[i][0], points[i][1]), 5)
             pg.display.update()
