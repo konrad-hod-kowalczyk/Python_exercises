@@ -24,11 +24,11 @@ class visualisation():
         self.height=720/len(self.verses)
         print(self.verses)
         points=[]
-        h=50
+        h=10
         for i in range(len(self.verses)):
             w = len(self.verses[i])
             if w * 50 > 640:
-                center = 1280 / 2 - (w * 50) % 640
+                center = 1280 / 2 - (w * 50) % 720
             else:
                 center = 1280 / 2
             for j in range(w):
@@ -36,12 +36,14 @@ class visualisation():
                 w += 50
             h += self.height
         lines=[]
-        for i in range(len(points)):
+        for i in range(len(points)-1):
             index=-1
             for j in range(len(pointstab)):
                 if points[i][2] == pointstab[j].number:
                     index=j
                     break
+            if index==-1:
+                continue
             for j in range(len(pointstab[index].tuple)):
                 for k in range(len(points)):
                     if pointstab[index].tuple[j] == points[k][2]:
