@@ -35,22 +35,28 @@ def initialisation(n,rang,max):
         banned.append(tabtab[t])
         tabtab.remove(tabtab[t])
     points.append(branch(n,help))
+    r=[]
     for i in range(len(help)):
         if i>=len(help) or len(table)==0:
             break
         h = len(table)
-        r = math.floor(random.random() * (h-rang))
-        rang+=r
-        initialisation(help[i],r,max)
+        r.append((math.floor(random.random() * (h-rang)))/5)
+        rang+=r[i]
+    print("rang=",rang)
+    rang=sum(r)
+    if rang==0:
+        rang=1
+    for i in range(len(help)):
+        initialisation(help[i],int(r[i]%rang),max)
 size=math.floor(random.random() * 50)+1
-size=10
+#size=10
 table=[]
 for i in range(size):
     table.append(i+1)
 print(table)
 points=[]
 banned=[]
-rr=math.floor(random.random()*(size/2))+1
+rr=math.floor(random.random()*(size/5))+1
 initialisation(table[0],rr,table[size-1])
 for i in range(len(points)):
     print(points[i].number)
