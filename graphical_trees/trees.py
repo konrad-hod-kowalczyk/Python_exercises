@@ -49,7 +49,6 @@ def initialisation(n,rang,max):
     for i in range(len(help)):
         initialisation(help[i],int(r[i]%rang),max)
 size=math.floor(random.random() * 50)+1
-#size=10
 table=[]
 for i in range(size):
     table.append(i+1)
