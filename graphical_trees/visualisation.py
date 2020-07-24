@@ -4,6 +4,8 @@ import sys
 screen = pg.display.set_mode((1280,720))
 class visualisation():
     def __init__(self,pointstab,tab):
+        pg.init() #initialisation of pygame
+        font = pg.font.Font('freesansbold.ttf', 20) #initialisation of used font
         self.verses=[]
         tab.append(1)  #appending 1 to the top verse, as tree is always beginning with 1 in this program
         self.verses.append(tab)  #appending to verse table
@@ -54,6 +56,8 @@ class visualisation():
                     sys.exit(0)
             for i in range(len(points)):
                 pg.draw.circle(screen, (255, 255, 255), (points[i][0], points[i][1]), 5)
+                text = font.render(str(points[i][2]), True, (0, 255, 0))
+                screen.blit(text, (points[i][0], points[i][1]))
             for i in range(len(lines)):
                 pg.draw.line(screen,(255,255,255),lines[i][0],lines[i][1],1)
             pg.display.update()
