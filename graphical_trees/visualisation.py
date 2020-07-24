@@ -26,12 +26,12 @@ class visualisation():
         points=[] #table for coordinates on screen for every point
         h=10 #height for first point on the screen
         for i in range(len(self.verses)):
-            w = len(self.verses[i])
-            if w * 50 > 640:
-                center = 1280 / 2 - (w * 50) % 720
-            else:
+            w = len(self.verses[i]) # w standing for width is number of integrals in verse
+            if w * 50 > 640: #if there is too many integrals to start from middle of screen, then make another center
+                center = 1280 / 2 - (w * 50) % 640
+            else: #else center is the middle of screen
                 center = 1280 / 2
-            for j in range(w):
+            for j in range(w): #appending width, height and number of point
                 points.append((int(1280-w-center),int(h),self.verses[i][j]))
                 w += 50
             h += self.height
