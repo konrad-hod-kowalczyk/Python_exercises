@@ -3,13 +3,13 @@ import math
 from branches import branch
 from visualisation import visualisation
 def initialisation(n,rang,max):
-    global points
-    global table
-    global banned
-    table.remove(n)
-    if rang<=0 or len(table)==0 or len(banned)==max-1:
+    global points #table for points and their connections
+    global table #table of unused yet points
+    global banned #table of used points
+    table.remove(n) #removing current point
+    if rang<=0 or len(table)==0 or len(banned)==max-1: #if non positive number was randomized or all points are banned, stop doing this function
         return 0
-    if rang>len(table):
+    if rang>len(table): #if randomized number is greater than length of the table 
         rang=len(table)
     help=[]
     h=len(table)
