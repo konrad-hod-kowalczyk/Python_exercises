@@ -40,13 +40,13 @@ class visualisation():
         lines=[]
         for i in range(len(points)-1):
             index=-1
-            for j in range(len(pointstab)):
+            for j in range(len(pointstab)): #searching for index in table for given number
                 if points[i][2] == pointstab[j].number:
                     index=j
                     break
             if index==-1:
                 continue
-            for j in range(len(pointstab[index].tuple)):
+            for j in range(len(pointstab[index].tuple)): #appending coordinates of current number and it's children to lines table
                 for k in range(len(points)):
                     if pointstab[index].tuple[j] == points[k][2]:
                         lines.append(((points[i][0],points[i][1]),(points[k][0],points[k][1])))
@@ -54,10 +54,10 @@ class visualisation():
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     sys.exit(0)
-            for i in range(len(points)):
+            for i in range(len(points)): #drawing points
                 pg.draw.circle(screen, (255, 255, 255), (points[i][0], points[i][1]), 5)
                 text = font.render(str(points[i][2]), True, (0, 255, 0))
-                screen.blit(text, (points[i][0], points[i][1]))
+                screen.blit(text, (points[i][0], points[i][1])) #printing out number of point
             for i in range(len(lines)):
-                pg.draw.line(screen,(255,255,255),lines[i][0],lines[i][1],1)
+                pg.draw.line(screen,(255,255,255),lines[i][0],lines[i][1],1) #drawing lines
             pg.display.update()
