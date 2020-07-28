@@ -14,26 +14,26 @@ def initialisation(n,rang,max):
     help=[]
     h=len(table)
     tabtab=[]
-    for i in range(len(table)):
+    for i in range(len(table)): #copying the main table 
         tabtab.append(table[i])
     for i in range(rang):
-        if len(tabtab)==0:
-            rang=len(help)
-            break
-        h -= 1
-        t=math.floor(random.random() * h)
-        if tabtab[t] in banned:
+        #if len(tabtab)==0: #if numbers in table end, DOES IT WORK?
+            #rang=len(help)
+            #break
+        h -= 1 #substracting one from the length of the table
+        t=math.floor(random.random() * h) #randomize index in the table
+        if tabtab[t] in banned: #if number with this index is already being used, then search the table for first number that isn't
             t=-1
             for i in range(len(tabtab)):
                 t+=1
                 if tabtab[t] not in banned:
                     break
-        if tabtab[t] in banned:
+        if tabtab[t] in banned: #if every number is in banned, continue to the next iteration, DOES IT WORK?
             h-=1
             continue
-        help.append(tabtab[t])
-        banned.append(tabtab[t])
-        tabtab.remove(tabtab[t])
+        help.append(tabtab[t]) #append the number to iteration table, table containing points connected to the function one
+        banned.append(tabtab[t]) #append the number to banned
+        tabtab.remove(tabtab[t]) #remove from copy, DOES IT WORK?
     points.append(branch(n,help))
     r=[]
     for i in range(len(help)):
