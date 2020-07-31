@@ -1,6 +1,6 @@
 import pygame as pg
 import sys
-
+#PROBLEM: verses don't work the way it should
 screen = pg.display.set_mode((1280,720))
 class visualisation():
     def __init__(self,pointstab,tab):
